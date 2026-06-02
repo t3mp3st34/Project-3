@@ -48,7 +48,6 @@ CREATE TABLE lapRecords (
     is_valid BOOLEAN DEFAULT TRUE, -- Flags track cuts
     FOREIGN KEY (sessionId) REFERENCES sessions(sessionId)
 );
-
     
 	
 ALTER TABLE drivers 
@@ -81,3 +80,7 @@ INSERT INTO tracks (trackId, trackName, location, lengthMiles) VALUES
  
  INSERT INTO lapRecords (lapId, sessionId, lapNumber, lap_time_ms, is_valid) VALUES
  (1, 1, 1, 106500, TRUE)
+
+
+ -- TABLE NAMES HAVE BEEN CORRECTED SO NO NEED FOR THE ALTER TABLE STATEMENTS ANYMORE
+ -- INSERTS ARE TEST DATA, REMOVE AT YOUR CONVIENCE
