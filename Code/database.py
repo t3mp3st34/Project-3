@@ -1,6 +1,12 @@
 #Project!3
 # Handles all SQL communication
 
+#Please ensure you have the MySQL Connector/Python installed and a MySQL server running with the appropriate database and table setup before using this code.
+#Please replace the connection parameters (host, user, password, database) with your actual MySQL server credentials and database name.
+
+#The databse download will be availabe for download on Git
+
+
 import mysql.connector
 from mysql.connector import Error
 
@@ -9,9 +15,9 @@ def insertLapTime(SessionId, lapNumber, lap_time_ms):
     cursor = None
     try:
         connection = mysql.connector.connect(
-            host = 'localhost',
-            user = 'root',
-            password = 'MySQLpass3449',
+            host = 'yourhostname',
+            user = 'youruser',
+            password = 'yourpass',
             database = 'laptimes'
         )
 
