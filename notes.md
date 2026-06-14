@@ -139,3 +139,11 @@ The finally: block
 What: This code always runs, whether the script succeeded or crashed.
 
 Why: Database connections are limited resources. If your script crashes but leaves the connection open, your MySQL server will eventually run out of available slots and lock everyone out. We must explicitly .close() the cursor and connection.
+
+
+Here is structure outline for app:
+[LapTimeTracker_Project] Project!3
+  ├── database.py       <-- Handles all SQL communication
+  ├── telemetry.py      <-- Handles reading the live simulation/game data
+  └── main.py           <-- The automation engine that connects them and runs
+  

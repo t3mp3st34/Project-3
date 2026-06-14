@@ -1,16 +1,17 @@
-# Lap Time trakcer code for Project!3 
+#Project!3
+# Handles all SQL communication
 
 import mysql.connector
 from mysql.connector import Error
 
-def insertLapTime(driverId, trackId, carId, lap_time_ms):
+def insertLapTime(SessionId, lapNumber, lap_time_ms):
     connection = None
     cursor = None
     try:
         connection = mysql.connector.connect(
             host = 'localhost',
             user = 'root',
-            password = 'MySQLpass3449!?',
+            password = 'MySQLpass3449',
             database = 'laptimes'
         )
 
@@ -18,14 +19,16 @@ def insertLapTime(driverId, trackId, carId, lap_time_ms):
             cursor = connection.cursor()
 
             query = """
-                INSERT INTO lapRecords (driverId, trackId, carId, lap_time_ms)
-                VALUES (%s, %s, %s, %s)
+                INSERT INTO lapRecords (SessionId, lapNumber, lap_time_ms)
+                VALUES (%s, %s, %s)
             """
-            cursor.execute(query, (driverId, trackId, carId, lap_time_ms))
+            cursor.execute(query, (SessionId, lapNumber, lap_time_ms))
             connection.commit()
-            print("Data successfully committed to the database!")
+            print(f"Lap {lapNumber} ({lap_time_ms}ms) successfully committed to Session {SessionId}!")
+    
     except Error as e:
         print(f"Error while connecting to MySQL: {e}")
+    
     finally:
         if cursor is not None:
             cursor.close()
@@ -36,5 +39,12 @@ def insertLapTime(driverId, trackId, carId, lap_time_ms):
 
 
 # --- TEST CALL ---
-# This actually triggers the recipe above using dummy IDs and a 1-minute, 24-second lap time
-insertLapTime(driverId=1, trackId=1, carId=1, lap_time_ms=84000)
+# This triggers the recipe above using dummy IDs and a laptime
+#insertLapTime(SessionId=1, lapNumber=2, lap_time_ms=8400)
+
+
+def getLapComparison(driverId, trackId, )
+
+
+
+
