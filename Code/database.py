@@ -10,7 +10,9 @@
 import mysql.connector
 from mysql.connector import Error
 
-def insertLapTime(SessionId, lapNumber, lap_time_ms):
+#Database connection 
+
+def dbConnect():
     connection = None
     cursor = None
     try:
@@ -20,7 +22,15 @@ def insertLapTime(SessionId, lapNumber, lap_time_ms):
             password = 'yourpass',
             database = 'laptimes'
         )
+        return connection
+    except Error as e:
+        print(f"Database connection error: {e}")
+        return None
 
+
+def insertLapTime(SessionId, lapNumber, lap_time_ms):
+    connection = None
+    
         if connection.is_connected():
             cursor = connection.cursor()
 
@@ -48,8 +58,21 @@ def insertLapTime(SessionId, lapNumber, lap_time_ms):
 # This triggers the recipe above using dummy IDs and a laptime
 #insertLapTime(SessionId=1, lapNumber=2, lap_time_ms=8400)
 
+#This will pull the best lap time for a given driver and track, excluding the current session, and return it for comparison with the current lap time.
 
-def getLapComparison(driverId, trackId, )
+def getLapComparison(driverId, trackId, currentSessionId):
+    connection = Noine
+    cursor = None
+    try:
+        connection = mysql.connector.connect(
+            host = 'localhost',
+            user= 'root',
+            password = 'MySQLpass3449',
+            database = 'laptimes'
+        )
+
+
+
 
 
 
