@@ -63,7 +63,7 @@ def insert_lap_time(driver_id, track_id, lap_time_seconds):
             host='localhost',
             user='your_username',
             password='your_password',
-            database='lap_time_tracker'
+            database='lapTimeTracker'
         )
         
         if connection.is_connected():
