@@ -3,48 +3,78 @@
 
 import mysql.connector
 from mysql.connector import Error
+import config
 
-def insertLapTime(SessionId, lapNumber, lap_time_ms):
-    connection = None
-    cursor = None
-    try:
+
+#MySQL connection
+def dbConnection():
+    try: #Establishes and returns MYSQL connection 
         connection = mysql.connector.connect(
-            host = 'localhost',
-            user = 'root',
-            password = 'MySQLpass3449',
-            database = 'laptimes'
+            host = config.host,
+            user = config.user,
+            password = config.password,
+            database = config.database
         )
-
-        if connection.is_connected():
-            cursor = connection.cursor()
-
-            query = """
-                INSERT INTO lapRecords (SessionId, lapNumber, lap_time_ms)
-                VALUES (%s, %s, %s)
-            """
-            cursor.execute(query, (SessionId, lapNumber, lap_time_ms))
-            connection.commit()
-            print(f"Lap {lapNumber} ({lap_time_ms}ms) successfully committed to Session {SessionId}!")
-    
+        return connection
     except Error as e:
-        print(f"Error while connecting to MySQL: {e}")
-    
+        print(f"[-] Database connection failure: {e}")
+        return None 
+
+# logs a completed lap time using reusable connection bridge
+def insertLapTime(lapNumber, lap_time_ms):
+
+    connection = dbConnection();
+    if connection is None:
+        print("Cannot log lap: Database connection offline")
+        return
+
+    cursor = None
+    try: 
+        cursor = connection.cursor()
+        query = """
+            INSERT INTO lapRecords (sessionId, lapNumber, lap_time_ms, is_valid)
+            VALUES (%s, %s, %s, TRUE)
+            """
+        
+        cursor.execute(query, (1, lapNumber, lap_time_ms))
+        connection.commit()
+        print(f"Lap {lapNumber} successfully saved!")
+
+    except Error as e:
+        print(f"Failed to execute query: {e}")
     finally:
-        if cursor is not None:
+        if cursor:
             cursor.close()
-        if connection is not None and connection.is_connected():
+        if connection.is_connected():
             connection.close()
-            print("MySQL connection is closed")
+    
+   
 
+#Run this to test connection 
+if __name__ == "__main__":
+    print("[*] Testing databse connection..")
 
+    test_connection = dbConnection()
+
+    if test_connection and test_connection.is_connected():
+        print("Successfully connected to 'laptimes' MySQL database!")
+
+        test_connection.close()
+        print("Database connection closed safely")
+
+        print("Testing lap record insertion...")
+        insertLapTime(lapNumber=1, lap_time_ms=84500)
+    
+    else:
+        print("Could not establish a connection")
 
 # --- TEST CALL ---
 # This triggers the recipe above using dummy IDs and a laptime
 #insertLapTime(SessionId=1, lapNumber=2, lap_time_ms=8400)
 
 
-def getLapComparison(driverId, trackId, )
-
+#def getLapComparison(driverId, trackId, carId, sessionId):
+    
 
 
 

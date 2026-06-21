@@ -75,8 +75,6 @@ INSERT INTO tracks (trackId, trackName, location, lengthMiles) VALUES
  1, 1, 1, 1, '2026-05-31', 'Sunny'
  );
  
- ALTER TABLE lapTimes
- RENAME TO lapRecords;
  
  INSERT INTO lapRecords (lapId, sessionId, lapNumber, lap_time_ms, is_valid) VALUES
  (1, 1, 1, 106500, TRUE)
