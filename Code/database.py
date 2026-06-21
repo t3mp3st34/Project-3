@@ -78,27 +78,7 @@ if __name__ == "__main__":
 # This triggers the recipe above using dummy IDs and a laptime
 #insertLapTime(SessionId=1, lapNumber=2, lap_time_ms=8400)
 
-#This will pull the best lap time for a given driver and track, excluding the current session, and return it for comparison with the current lap time.
-
-def getLapComparison(driverId, trackId, currentSessionId):
-    connection = Noine
-    cursor = None
-    try:
-        connection = mysql.connector.connect(
-            host = 'localhost',
-            user= 'root',
-            password = 'MySQLpass3449',
-            database = 'laptimes'
-        )
-
-
-
-<<<<<<< HEAD
-#def getLapComparison(driverId, trackId, carId, sessionId):
-    
-=======
-
->>>>>>> 4b46de6f6330c2344281aa4818061e759a782d6f
+#This will pull the best lap time for a given driver and track, excluding the current session, and return it for comparison with the current lap time.    
 
 
 
